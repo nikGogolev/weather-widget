@@ -235,7 +235,6 @@ export default defineComponent({
         // const response = await fetch(URL, options);
         // const data = await response.json();
         // this.bgImage = data.value[0].url;
-        // console.log(this.weather.weather[0].description);
       },
       deep: true,
     },
