@@ -15,11 +15,18 @@ import {
   faAnglesLeft,
   faBars,
   faXmark,
+  faPlus,
 } from "@fortawesome/free-solid-svg-icons";
-library.add(faGear, faAnglesLeft, faBars, faXmark);
+library.add(faGear, faAnglesLeft, faBars, faXmark, faPlus);
 
-createApp(App)
-  .use(store)
-  .use(router)
-  .component("font-awesome-icon", FontAwesomeIcon)
-  .mount("#app");
+class VueWeatherWidget extends HTMLElement {
+  connectedCallback() {
+    createApp(App)
+      .use(store)
+      .use(router)
+      .component("font-awesome-icon", FontAwesomeIcon)
+      .mount("#app");
+  }
+}
+
+customElements.define("vue-weather-widget", VueWeatherWidget);

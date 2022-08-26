@@ -93,7 +93,7 @@ export default defineComponent({
   overflow: hidden;
   align-items: stretch;
   padding: 10px;
-  background-image: url("https://avatars.mds.yandex.net/i?id=6e7bc58c62a7221f3cf53c75a34d3ade-5233506-images-thumbs&n=13");
+  background-image: url("https://images.wallpaperscraft.ru/image/single/oblaka_nebo_goluboj_113445_2560x1440.jpg");
   background-size: cover;
   border-radius: 20px;
 }

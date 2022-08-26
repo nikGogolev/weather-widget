@@ -40,6 +40,7 @@
 </template>
 
 <script lang="ts">
+// import { X_RAPID_API_KEY } from "@/utils/constants";
 import { defineComponent } from "vue";
 
 export class Weather {
@@ -211,35 +212,30 @@ export default defineComponent({
       },
     },
   },
-  created() {
-    this.fetchImage();
-  },
   data() {
     return {
       weatherIcon1: "",
       bgImage:
-        "https://avatars.mds.yandex.net/i?id=6e7bc58c62a7221f3cf53c75a34d3ade-5233506-images-thumbs&n=13",
+        "https://images.wallpaperscraft.ru/image/single/oblaka_nebo_goluboj_113445_2560x1440.jpg",
     };
   },
   watch: {
     "weather.weather": {
       async handler() {
-        const options = {
-          method: "GET",
-          headers: {
-            "X-RapidAPI-Key":
-              "4e44144089msh7d7a0bc96ab0e16p188257jsn6e9c00a8cf20",
-            "X-RapidAPI-Host":
-              "contextualwebsearch-websearch-v1.p.rapidapi.com",
-          },
-        };
-
-        const URL = `https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/ImageSearchAPI?q=weather ${this.weather?.weather[0].description}&pageNumber=1&pageSize=10&autoCorrect=true`;
-
-        const response = await fetch(URL, options);
-        const data = await response.json();
-        this.bgImage = data.value[0].url;
-        console.log(this.weather.weather[0].description);
+        // const options = {
+        //   method: "GET",
+        //   headers: {
+        //     "X-RapidAPI-Key": X_RAPID_API_KEY,
+        //     "X-RapidAPI-Host":
+        //       "contextualwebsearch-websearch-v1.p.rapidapi.com",
+        //   },
+        // };
+        // const URL = `https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/ImageSearchAPI?q=${this.weather.name} ${this.weather?.sys.country}&pageNumber=1&pageSize=10&autoCorrect=true`;
+        // // const URL = `https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/ImageSearchAPI?q=weather ${this.weather?.weather[0].description}&pageNumber=1&pageSize=10&autoCorrect=true`;
+        // const response = await fetch(URL, options);
+        // const data = await response.json();
+        // this.bgImage = data.value[0].url;
+        // console.log(this.weather.weather[0].description);
       },
       deep: true,
     },
@@ -277,27 +273,6 @@ export default defineComponent({
       return this.weather?.visibility < 1000
         ? `${this.weather?.visibility.toFixed(0)} m`
         : `${(this.weather?.visibility / 1000).toFixed(0)} km`;
-    },
-  },
-
-  methods: {
-    async fetchImage() {
-      // const options = {
-      //   method: "GET",
-      //   headers: {
-      //     "X-RapidAPI-Key":
-      //       "4e44144089msh7d7a0bc96ab0e16p188257jsn6e9c00a8cf20",
-      //     "X-RapidAPI-Host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
-      //   },
-      // };
-      // const URL = `https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/ImageSearchAPI?q=weather ${this.weather?.weather[0].description}&pageNumber=1&pageSize=10&autoCorrect=true`;
-      // const response = await fetch(URL, options);
-      // const data = await response.json();
-      // this.bgImage = data.value[0].url;
-      // console.log(this.weather?.weather[0].description);
-      // const URL = `https://serpapi.com/search?engine=yandex_images&text=qwe${this.weather?.weather[0].description}&api_key=243f53aa78a2f9dd70835b4e92a74b2e43186bb764c1a75a7222e7d00a74de72`;
-      // const response = await jsonp(URL);
-      //
     },
   },
 });

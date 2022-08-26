@@ -6,16 +6,15 @@
     placeholder="Start input place"
     class="search_input"
   />
-  <ul v-if="matches" class="matches">
-    <li
+  <div v-if="matches" class="matches">
+    <search-result
       v-for="match in matches"
       :key="match.id"
-      class="match_item"
-      @click="addLocation(match)"
+      @addLocation="addLocation(match)"
     >
       {{ match.name }}, {{ match.country }}
-    </li>
-  </ul>
+    </search-result>
+  </div>
 </template>
 
 <script lang="ts">
@@ -23,6 +22,7 @@ import store from "@/store";
 import { ADD_LOCATION } from "@/store/mutationTypes";
 import { defineComponent } from "vue";
 import cities from "@/assets/cities.json";
+import SearchResult from "@/components/SearchResult.vue";
 class City {
   id: number;
   name: string;
@@ -35,6 +35,7 @@ class City {
 }
 export default defineComponent({
   name: "SearchComponent",
+  components: { SearchResult },
   data() {
     return {
       country: "",
@@ -92,12 +93,6 @@ export default defineComponent({
   margin: 0;
   width: 80%;
   margin: 0 auto;
-}
-.match_item {
-  width: 100%;
-  list-style: none;
-  cursor: pointer;
-  text-align: left;
 }
 
 .match_item:hover {

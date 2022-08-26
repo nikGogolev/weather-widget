@@ -15,8 +15,7 @@
     "vue": "^3.0.0",
     "vue-jsonp": "^2.0.0",
     "vue-router": "^4.0.0-0",
-    "vuex": "^4.0.0-0",
-    "yandex-pictures": "^1.4.88"
+    "vuex": "^4.0.0-0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.18.0",

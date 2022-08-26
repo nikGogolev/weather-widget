@@ -18,6 +18,7 @@ export default defineComponent({
 * {
   box-sizing: border-box;
 }
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -28,6 +29,7 @@ export default defineComponent({
   width: 300px;
   background-color: lightblue;
   border-radius: 20px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
 
 #nav {
