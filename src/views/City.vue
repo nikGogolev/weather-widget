@@ -16,7 +16,6 @@ export default defineComponent({
   },
   created() {
     this.location = store.getters.getLocationById(+this.$route.params.id);
-    console.log(this.location);
     this.getWeather();
   },
   data() {
@@ -27,8 +26,7 @@ export default defineComponent({
   },
   methods: {
     async getWeather() {
-      const URL = `https://api.openweathermap.org/data/2.5/weather?q=${this.location.city}&appid=${OPEN_WEATHER_API_KEY}`;
-      console.log(URL);
+      const URL = `https://api.openweathermap.org/data/2.5/weather?q=${this.location.city},${this.location.country}&appid=${OPEN_WEATHER_API_KEY}`;
       const response = await fetch(URL);
       const data: Weather = await response.json();
       this.weather = data;

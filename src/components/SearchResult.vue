@@ -29,10 +29,12 @@ export default defineComponent({
   width: 100%;
   display: flex;
   justify-content: space-between;
+  border-radius: 5px;
 }
 
 .result_item:hover {
-  background-color: deepskyblue;
+  background-color: rgba(0, 191, 255, 0.5);
+  transform: scale(1.2);
 }
 
 .add_button {

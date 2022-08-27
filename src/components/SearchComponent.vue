@@ -6,13 +6,13 @@
     placeholder="Start input place"
     class="search_input"
   />
-  <div v-if="matches" class="matches">
+  <div v-if="results" class="results">
     <search-result
-      v-for="match in matches"
-      :key="match.id"
-      @addLocation="addLocation(match)"
+      v-for="result in results"
+      :key="result.id"
+      @addLocation="addLocation(result)"
     >
-      {{ match.name }}, {{ match.country }}
+      {{ result.city }}, {{ result.country }}
     </search-result>
   </div>
 </template>
@@ -21,17 +21,30 @@
 import store from "@/store";
 import { ADD_LOCATION } from "@/store/mutationTypes";
 import { defineComponent } from "vue";
-import cities from "@/assets/cities.json";
+// import cities from "@/assets/cities.json";
 import SearchResult from "@/components/SearchResult.vue";
+// import { jsonp } from "vue-jsonp";
 class City {
   id: number;
-  name: string;
+  city: string;
   country: string;
+  svg: string;
   constructor() {
     this.id = 0;
-    this.name = "";
+    this.city = "";
     this.country = "";
+    this.svg = "";
   }
+}
+interface Response {
+  place_id: number;
+  svg: string;
+  address: {
+    city: string;
+    town: string;
+    state: string;
+    country_code: string;
+  };
 }
 export default defineComponent({
   name: "SearchComponent",
@@ -40,8 +53,8 @@ export default defineComponent({
     return {
       country: "",
       city: "",
-      matches: new Array<City>(),
-      cities: cities,
+      results: new Array<City>(),
+      // cities: cities,
       timer: 0,
     };
   },
@@ -49,11 +62,11 @@ export default defineComponent({
     addLocation(city: City) {
       store.commit(ADD_LOCATION, {
         id: city.id,
-        city: city.name,
+        city: city.city,
         country: city.country,
       });
       this.city = "";
-      this.matches = [];
+      this.results = [];
     },
     async searchTimeOut() {
       if (this.timer) {
@@ -64,14 +77,34 @@ export default defineComponent({
         this.searchCity();
       }, 500);
     },
-    searchCity() {
-      const matches = [];
-      for (const city of this.cities) {
-        if (city.name.toLowerCase().includes(this.city)) {
-          matches.push(city);
+    async searchCity() {
+      const searchRequest = `https://nominatim.openstreetmap.org/search/${this.city}?format=json&addressdetails=1&limit=5&polygon_svg=1`;
+      const response = await fetch(searchRequest);
+      const data = await response.json();
+      // const data = await response.json();
+      console.log(data);
+      const results = data.map((item: Response) => {
+        if (typeof item == "object" || item !== null) {
+          return {
+            id: item.place_id,
+            city: item.address.city
+              ? item.address.city
+              : item.address.town
+              ? item.address.town
+              : item.address.state,
+            country: item.address.country_code,
+            svg: item.svg,
+          };
         }
-      }
-      this.matches = matches.slice(0, 5);
+      });
+      this.results = results;
+      console.log(results);
+      // for (const city of this.cities) {
+      //   if (city.name.toLowerCase().includes(this.city)) {
+      //     matches.push(city);
+      //   }
+      // }
+      // this.matches = matches.slice(0, 5);
     },
   },
 });
@@ -85,7 +118,7 @@ export default defineComponent({
   border-radius: 5px;
   border: 2px solid transparent;
 }
-.matches {
+.results {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -95,7 +128,7 @@ export default defineComponent({
   margin: 0 auto;
 }
 
-.match_item:hover {
-  background-color: deepskyblue;
+.result_item {
+  padding: 3px;
 }
 </style>
