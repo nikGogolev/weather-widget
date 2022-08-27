@@ -30,11 +30,13 @@ export default defineComponent({
   display: flex;
   justify-content: space-between;
   border-radius: 5px;
+  padding: 3px;
 }
 
 .result_item:hover {
-  background-color: rgba(0, 191, 255, 0.5);
-  transform: scale(1.2);
+  background-color: rgba(0, 191, 255, 0.3);
+  transform: scale(1.1);
+  backdrop-filter: blur(1px);
 }
 
 .add_button {

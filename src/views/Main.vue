@@ -31,11 +31,16 @@ export default defineComponent({
     },
 
     async getWeather() {
-      const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${this.location}&appid=${OPEN_WEATHER_API_KEY}`
-      );
-      const data: Weather = await response.json();
-      this.weather = data;
+      try {
+        const URL = `https://api.openweathermap.org/data/2.5/weather?q=${this.location}&appid=${OPEN_WEATHER_API_KEY}`;
+        const response = await fetch(URL);
+        const data: Weather = await response.json();
+        this.weather = data;
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          console.log(error.message);
+        }
+      }
     },
   },
 });

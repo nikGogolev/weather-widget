@@ -6,7 +6,7 @@
     }"
   >
     <div class="header">
-      <h3>{{ weather.name }}, {{ weather.sys.country }}</h3>
+      <h3>{{ weather?.name }}, {{ weather?.sys.country }}</h3>
       <router-link class="" to="/settings"
         ><font-awesome-icon
           class="settings"
@@ -22,10 +22,15 @@
       <div class="description">
         <p class="weather_description">
           Feels like {{ weatherFeelsLikeTemp }} C.
-          {{ weather?.weather[0].description }}
+          {{ weatherDescription }}
         </p>
       </div>
       <div class="wind_pressure">
+        <font-awesome-icon
+          :style="{ transform: `rotate(${weather?.wind.deg - 45}deg)` }"
+          class="wind_direction"
+          icon="fa-solid fa-location-arrow"
+        ></font-awesome-icon>
         <span class="weather_wind">{{ weatherWindSpeed }} m/s</span>
         <span class="weather_pressure">{{ weatherPressure }} hPa</span>
       </div>
@@ -40,7 +45,7 @@
 </template>
 
 <script lang="ts">
-// import { X_RAPID_API_KEY } from "@/utils/constants";
+import { capitalizeFirstLetter } from "@/utils/helpers";
 import { defineComponent } from "vue";
 
 export class Weather {
@@ -219,26 +224,6 @@ export default defineComponent({
         "https://images.wallpaperscraft.ru/image/single/oblaka_nebo_goluboj_113445_2560x1440.jpg",
     };
   },
-  watch: {
-    "weather.weather": {
-      async handler() {
-        // const options = {
-        //   method: "GET",
-        //   headers: {
-        //     "X-RapidAPI-Key": X_RAPID_API_KEY,
-        //     "X-RapidAPI-Host":
-        //       "contextualwebsearch-websearch-v1.p.rapidapi.com",
-        //   },
-        // };
-        // const URL = `https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/ImageSearchAPI?q=${this.weather.name} ${this.weather?.sys.country}&pageNumber=1&pageSize=10&autoCorrect=true`;
-        // // const URL = `https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/ImageSearchAPI?q=weather ${this.weather?.weather[0].description}&pageNumber=1&pageSize=10&autoCorrect=true`;
-        // const response = await fetch(URL, options);
-        // const data = await response.json();
-        // this.bgImage = data.value[0].url;
-      },
-      deep: true,
-    },
-  },
 
   computed: {
     weatherIcon() {
@@ -273,6 +258,10 @@ export default defineComponent({
         ? `${this.weather?.visibility.toFixed(0)} m`
         : `${(this.weather?.visibility / 1000).toFixed(0)} km`;
     },
+
+    weatherDescription() {
+      return capitalizeFirstLetter(this.weather?.weather[0].description);
+    },
   },
 });
 </script>
@@ -300,17 +289,23 @@ export default defineComponent({
   font-size: 30px;
 }
 
+.weather_description {
+  font-size: 1.1em;
+}
+
 .wind_pressure {
   display: flex;
   align-items: center;
   justify-content: space-around;
   margin-bottom: 10px;
+  font-size: 1.5em;
 }
 
 .humidity_visibility {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  font-size: 1.2em;
 }
 
 .settings {

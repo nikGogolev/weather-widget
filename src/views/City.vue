@@ -26,10 +26,16 @@ export default defineComponent({
   },
   methods: {
     async getWeather() {
-      const URL = `https://api.openweathermap.org/data/2.5/weather?q=${this.location.city},${this.location.country}&appid=${OPEN_WEATHER_API_KEY}`;
-      const response = await fetch(URL);
-      const data: Weather = await response.json();
-      this.weather = data;
+      try {
+        const URL = `https://api.openweathermap.org/data/2.5/weather?q=${this.location.city},${this.location.country}&appid=${OPEN_WEATHER_API_KEY}`;
+        const response = await fetch(URL);
+        const data: Weather = await response.json();
+        this.weather = data;
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          console.log(error.message);
+        }
+      }
     },
   },
 });

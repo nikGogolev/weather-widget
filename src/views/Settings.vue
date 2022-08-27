@@ -1,12 +1,10 @@
 <template>
   <div class="settings">
     <div class="header">
-      <router-link class="" to="/"
-        ><font-awesome-icon
-          class="back"
-          icon="fa-solid fa-angles-left"
-        ></font-awesome-icon
-      ></router-link>
+      <button @click="$router.back" class="back_button">
+        <font-awesome-icon icon="fa-solid fa-angles-left"></font-awesome-icon>
+      </button>
+      <router-link class="home_link" to="/"> Home</router-link>
       <h3>Locations</h3>
     </div>
 
@@ -103,12 +101,22 @@ export default defineComponent({
   justify-content: space-between;
   align-items: center;
 }
-.back {
-  font-size: 30px;
+
+.back_button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 2em;
+  color: gray;
+}
+.home_link {
+  text-decoration: none;
+  font-size: 1.5em;
   color: gray;
 }
 
-.back:hover {
+.home_link:hover,
+.back_button:hover {
   color: cornflowerblue;
 }
 
@@ -116,12 +124,18 @@ export default defineComponent({
   flex-grow: 2;
   overflow: auto;
   scrollbar-width: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .locations::-webkit-scrollbar {
   display: none; /*chrome*/
 }
 
 .location {
-  margin-bottom: 10px;
+  margin: 5px 0;
+}
+.location:hover {
+  transform: scale(1.05);
 }
 </style>

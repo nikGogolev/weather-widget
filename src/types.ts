@@ -136,3 +136,13 @@ export class Location {
     this.country = "";
   }
 }
+
+export interface Response {
+  place_id: number;
+  address: {
+    city: string;
+    town: string;
+    state: string;
+    country_code: string;
+  };
+}

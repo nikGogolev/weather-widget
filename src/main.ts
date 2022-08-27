@@ -16,8 +16,9 @@ import {
   faBars,
   faXmark,
   faPlus,
+  faLocationArrow,
 } from "@fortawesome/free-solid-svg-icons";
-library.add(faGear, faAnglesLeft, faBars, faXmark, faPlus);
+library.add(faGear, faAnglesLeft, faBars, faXmark, faPlus, faLocationArrow);
 
 class VueWeatherWidget extends HTMLElement {
   connectedCallback() {
