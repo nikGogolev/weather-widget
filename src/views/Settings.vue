@@ -24,7 +24,7 @@
         :location="location"
       />
     </div>
-    <search-component />
+    <search-component @error="(errorText: string) => setError(errorText)" />
   </div>
 </template>
 
@@ -38,6 +38,7 @@ import { Location } from "@/types";
 export default defineComponent({
   name: "Settings",
   components: { LocationCard, SearchComponent },
+  emits: ["error"],
   computed: {
     locations(): Location[] {
       return store.getters.getLocations;
@@ -78,6 +79,9 @@ export default defineComponent({
           }
         });
       }
+    },
+    setError(errorText: string) {
+      this.$emit("error", errorText);
     },
   },
 });

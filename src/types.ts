@@ -128,11 +128,13 @@ export class WeatherWeather {
 export class Location {
   id: number;
   city: string;
+  country_code: string;
   country: string;
 
   constructor() {
     this.id = 0;
     this.city = "";
+    this.country_code = "";
     this.country = "";
   }
 }
@@ -144,5 +146,6 @@ export interface Response {
     town: string;
     state: string;
     country_code: string;
+    country: string;
   };
 }

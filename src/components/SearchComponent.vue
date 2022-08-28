@@ -27,6 +27,7 @@ import { Location, Response } from "@/types";
 export default defineComponent({
   name: "SearchComponent",
   components: { SearchResult },
+  emits: ["error"],
   data() {
     return {
       country: "",
@@ -41,6 +42,7 @@ export default defineComponent({
         id: city.id,
         city: city.city,
         country: city.country,
+        country_code: city.country_code,
       });
       this.city = "";
       this.results = [];
@@ -68,16 +70,21 @@ export default defineComponent({
                 : item.address.town
                 ? item.address.town
                 : item.address.state,
-              country: item.address.country_code,
+              country: item.address.country,
+              country_code: item.address.country_code,
             };
           }
         });
         this.results = results;
       } catch (error: unknown) {
         if (error instanceof Error) {
+          this.setError(error.message);
           console.log(error.message);
         }
       }
+    },
+    setError(errorText: string) {
+      this.$emit("error", errorText);
     },
   },
 });

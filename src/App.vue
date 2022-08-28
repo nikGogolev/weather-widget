@@ -1,13 +1,28 @@
 <template>
-  <router-view />
+  <Modal v-if="error" @close="error = false" :errorText="errorText" />
+  <router-view @error="(errorText: string) => setError(errorText)" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import store from "./store";
 import { RESTORE_LOCATIONS } from "./store/mutationTypes";
+import Modal from "@/components/Modal.vue";
+
 export default defineComponent({
   name: "App",
+  components: {
+    Modal,
+  },
+  data() {
+    return { error: false, errorText: "" };
+  },
+  methods: {
+    setError(errorText: string) {
+      this.error = true;
+      this.errorText = errorText;
+    },
+  },
   created() {
     store.commit(RESTORE_LOCATIONS);
   },
@@ -30,6 +45,7 @@ export default defineComponent({
   background-color: lightblue;
   border-radius: 20px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  position: relative;
 }
 
 #nav {

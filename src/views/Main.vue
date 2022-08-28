@@ -12,6 +12,7 @@ export default defineComponent({
   components: {
     WeatherView,
   },
+  emits: ["error"],
   async created() {
     await this.getLocation();
     await this.getWeather();
@@ -34,13 +35,19 @@ export default defineComponent({
       try {
         const URL = `https://api.openweathermap.org/data/2.5/weather?q=${this.location}&appid=${OPEN_WEATHER_API_KEY}`;
         const response = await fetch(URL);
+        if (response.status !== 200) {
+          throw new Error(response.statusText);
+        }
         const data: Weather = await response.json();
         this.weather = data;
       } catch (error: unknown) {
         if (error instanceof Error) {
-          console.log(error.message);
+          this.setError(error.message);
         }
       }
+    },
+    setError(errorText: string) {
+      this.$emit("error", errorText);
     },
   },
 });

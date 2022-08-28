@@ -18,6 +18,11 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "SearchResult",
   emits: ["addLocation"],
+  methods: {
+    add() {
+      this.$emit("addLocation");
+    },
+  },
 });
 </script>
 

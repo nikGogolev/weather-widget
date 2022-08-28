@@ -51,6 +51,7 @@ export default defineComponent({
   width: 90%;
   border: 1px solid black;
   border-radius: 3px;
+  backdrop-filter: blur(2px);
   padding: 3px;
 }
 
@@ -71,5 +72,6 @@ export default defineComponent({
 .location_name {
   text-decoration: none;
   color: black;
+  padding: 10px 5px;
 }
 </style>
