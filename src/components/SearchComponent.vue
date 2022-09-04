@@ -46,6 +46,7 @@ export default defineComponent({
       });
       this.city = "";
       this.results = [];
+      this.$router.push(`city/${city.id}`);
     },
     async searchTimeOut() {
       if (this.timer) {
