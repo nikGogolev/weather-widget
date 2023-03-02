@@ -1,6 +1,6 @@
 <template>
   <div class="result_item">
-    <div class="result_name">
+    <div class="result_name" @click="$emit('addLocation')">
       <slot></slot>
     </div>
 
@@ -28,7 +28,7 @@ export default defineComponent({
 
 <style scoped>
 .result_name {
-  cursor: default;
+  cursor: pointer;
 }
 .result_item {
   width: 100%;

@@ -30,4 +30,4 @@ class VueWeatherWidget extends HTMLElement {
   }
 }
 
-customElements.define("vue-weather-widget", VueWeatherWidget);
+customElements.define("weather-widget", VueWeatherWidget);

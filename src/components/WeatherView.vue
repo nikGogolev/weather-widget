@@ -227,11 +227,15 @@ export default defineComponent({
 
   computed: {
     weatherIcon() {
-      return (
-        "http://openweathermap.org/img/wn/" +
-        this.weather?.weather[0].icon +
-        "@2x.png"
-      );
+      if (this.weather?.weather[0].icon) {
+        return (
+          "http://openweathermap.org/img/wn/" +
+          this.weather?.weather[0].icon +
+          "@2x.png"
+        );
+      } else {
+        return "";
+      }
     },
     weatherTemp() {
       return (this.weather?.main.temp - 273).toFixed(1);

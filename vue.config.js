@@ -7,11 +7,10 @@ module.exports = {
         ...options,
         compilerOptions: {
           // treat any tag that starts with ion- as custom elements
-          isCustomElement: (tag) => tag.startsWith("vue-weather-widget"),
+          isCustomElement: (tag) => tag.startsWith("weather-widget"),
         },
       }));
   },
   transpileDependencies: [],
-  publicPath:
-    process.env.NODE_ENV === "production" ? "/vue-weather-widget/" : "/",
+  publicPath: process.env.NODE_ENV === "production" ? "/weather-widget/" : "/",
 };
