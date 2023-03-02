@@ -177,7 +177,7 @@ export class WeatherWeather {
 }
 
 export default defineComponent({
-  name: "WeatherView",
+  name: "WeatherComponent",
   props: {
     weather: {
       type: Object,

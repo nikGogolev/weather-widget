@@ -1,18 +1,18 @@
 <template>
-  <weather-view :weather="weather" />
+  <weather-component :weather="weather" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import WeatherView, { Weather } from "@/components/WeatherView.vue";
+import WeatherComponent, { Weather } from "@/components/WeatherComponent.vue";
 import { Location } from "@/types";
 import store from "@/store";
 import { OPEN_WEATHER_API_KEY } from "@/utils/constants";
 
 export default defineComponent({
-  name: "City",
+  name: "CityView",
   components: {
-    WeatherView,
+    WeatherComponent,
   },
   emits: ["error"],
   created() {

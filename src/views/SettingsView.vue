@@ -36,7 +36,7 @@ import SearchComponent from "@/components/SearchComponent.vue";
 import { CHANGE_LOCATIONS } from "@/store/mutationTypes";
 import { Location } from "@/types";
 export default defineComponent({
-  name: "Settings",
+  name: "SettingsView",
   components: { LocationCard, SearchComponent },
   emits: ["error"],
   computed: {

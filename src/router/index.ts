@@ -1,23 +1,23 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import Home from "../views/Main.vue";
-import Settings from "../views/Settings.vue";
-import City from "../views/City.vue";
+import HomeView from "../views/MainView.vue";
+import SettingsView from "../views/SettingsView.vue";
+import CityView from "../views/CityView.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "Home",
-    component: Home,
+    component: HomeView,
   },
   {
     path: "/settings",
     name: "Settings",
-    component: Settings,
+    component: SettingsView,
   },
   {
     path: "/city/:id",
     name: "City",
-    component: City,
+    component: CityView,
   },
 ];
 
